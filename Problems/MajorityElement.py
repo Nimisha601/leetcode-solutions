@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode id=1822272062 lang=python3
+ * @lc app=leetcode id=1822279950 lang=python3
  *
  * MajorityElement
  * 
@@ -11,13 +11,20 @@
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        ele={}
-        for i in range(len(nums)):
-            if nums[i] in ele:
-                ele[nums[i]]+=1
+        #(by using boyer-moore voting algo)
+        cand =nums[0]
+        count =1 
+        for i in range(1,len(nums)):
+            if count ==0:
+                cand =nums[i]
+                count =1 
+            elif nums[i]==cand:
+                count+=1
             else:
-                ele[nums[i]]=1
-        return max(ele,key=ele.get)            
+                count-=1
+        return cand        
+
+
             
 
         
