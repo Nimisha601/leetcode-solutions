@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode id=1760919568 lang=python3
+ * @lc app=leetcode id=1801389084 lang=python3
  *
  * LongestSubstringWithoutRepeatingCharacters
  * 
@@ -11,12 +11,12 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        m=0
-        ans=[]
-        for i in range(len(s)):
-            if s[i] in ans:
-                ans=ans[ans.index(s[i])+1:]
-            ans.append(s[i])
-            m=max(m,len(ans))
-                
-        return m
+       seen={}
+       best=0
+       left=0
+       for right,i in enumerate(s):
+         if i in seen and seen[i]>=left:
+            left =seen[i]+1
+         seen[i]=right
+         best =max(best,right-left+1)
+       return best    
